@@ -34,6 +34,27 @@ router.get('/low-stock', async (req, res) => {
 })
 
 
+router.get('/statistics', async (req, res) => {
+    try {
+        const statisticsOfAllProducts = await Product.find()
+
+        const totalProducts = statisticsOfAllProducts.length
+
+        const totalQuantity = statisticsOfAllProducts.reduce(
+            (total, product) => total + product.quantity,
+            0
+        )
+
+        res.status(200).json({
+            totalProducts: totalProducts,
+            totalQuantity: totalQuantity
+        })
+
+    } catch (err) {
+        res.status(400).json({ message: err.message })
+    }
+})
+
 router.get('/:id', async (req, res) => {
     try {
         const oneProduct = await Product.findById(req.params.id)
