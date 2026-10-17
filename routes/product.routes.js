@@ -23,7 +23,15 @@ router.get('/', async (req, res) => {
 })
 
 
+router.get('/:id', async (req, res) => {
+    try {
+        const oneProduct = await Product.findById(req.params.id)
+        res.status(200).json(oneProduct)
+    } catch (err) {
+        res.status(400).json({ message: err.message })
 
+    }
+})
 
 
 
