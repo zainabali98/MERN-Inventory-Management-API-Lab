@@ -40,14 +40,19 @@ router.get('/statistics', async (req, res) => {
 
         const totalProducts = statisticsOfAllProducts.length
 
-        const totalQuantity = statisticsOfAllProducts.reduce(
-            (total, product) => total + product.quantity,
+        const totalValue = statisticsOfAllProducts.reduce(
+            (total, product) => total + product.price * product.quantity,
             0
         )
 
+        const lowStockItems = statisticsOfAllProducts.filter(
+            (product) => product.quantity < 3
+        ).length
+
         res.status(200).json({
             totalProducts: totalProducts,
-            totalQuantity: totalQuantity
+            totalValue: totalValue,
+            lowStockItems: lowStockItems
         })
 
     } catch (err) {
