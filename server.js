@@ -5,8 +5,8 @@ const dotenv = require("dotenv").config() //this allows me to use my .env values
 const morgan = require('morgan')
 const cors = require('cors')
 const connectToDB = require('./db.js')
-const router = require("express").Router();
-const mongoose = require('mongoose')
+const productsRoutes = require('./routes/product.routes.js');
+
 
 
 // Middleware
@@ -18,6 +18,7 @@ app.use(
 
 app.use(express.json())
 app.use(morgan('dev'))
+app.use('/products', productsRoutes)
 
 
 

@@ -1,31 +1,31 @@
 const mongoose = require('mongoose')
 
 const productSchema = new mongoose.Schema({
-    title:{
+    title: {
         type: String,
         required: true,
         trim: true
     },
-    description:{
+    description: {
         type: String,
         maxLength: 500
-        },
-    category:{
-        type:String,
+    },
+    category: {
+        type: String,
         required: true,
         enum: ['electronics', 'food', 'clothing', 'furniture', 'other']
     },
-    price:{
+    price: {
         type: Number,
         min: 0.1,
         required: true
     },
-    quantity:{
+    quantity: {
         type: Number,
-        min:0,
+        min: 0,
         required: true
     }
-},{timestamps: true})
+}, { timestamps: true })
 
 const Product = mongoose.model('Product', productSchema)
 
