@@ -38,7 +38,7 @@ router.put('/:id', async (req, res) => {
         const updatedProduct = await Product.findByIdAndUpdate(
             req.params.id,
             req.body,
-        { new: true, runValidators: true }
+            { new: true, runValidators: true }
         )
         res.status(200).json(updatedProduct)
     } catch (err) {
@@ -47,6 +47,18 @@ router.put('/:id', async (req, res) => {
 })
 
 
+
+
+
+
+router.delete('/:id', async (req, res) => {
+    try {
+        const deletedProduct = await Product.findByIdAndDelete(req.params.id)
+        res.status(200).json(deletedProduct)
+    } catch (err) {
+        res.status(400).json({ message: err.message })
+    }
+})
 
 
 
