@@ -13,10 +13,21 @@ router.post('/', async (req, res) => {
 
 })
 
+
 router.get('/', async (req, res) => {
     try {
         const allProducts = await Product.find()
         res.status(200).json(allProducts)
+    } catch (err) {
+        res.status(400).json({ message: err.message })
+    }
+})
+
+
+router.get('/low-stock', async (req, res) => {
+    try {
+        const lowStockproduct = await Product.find({ quantity: { $lt: 3 } })
+        res.status(200).json(lowStockproduct)
     } catch (err) {
         res.status(400).json({ message: err.message })
     }
@@ -33,6 +44,7 @@ router.get('/:id', async (req, res) => {
     }
 })
 
+
 router.put('/:id', async (req, res) => {
     try {
         const updatedProduct = await Product.findByIdAndUpdate(
@@ -45,10 +57,6 @@ router.put('/:id', async (req, res) => {
         res.status(400).json({ message: err.message })
     }
 })
-
-
-
-
 
 
 router.delete('/:id', async (req, res) => {
