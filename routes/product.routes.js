@@ -13,6 +13,14 @@ router.post('/', async (req, res) => {
 
 })
 
+router.get('/', async (req, res) => {
+    try {
+        const allProducts = await Product.find()
+        res.status(200).json(allProducts)
+    } catch (err) {
+        res.status(400).json({ message: err.message })
+    }
+})
 
 
 
